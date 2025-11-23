@@ -2,8 +2,6 @@ name: Keep Supabase Alive
 
 on:
   schedule:
-    # This runs "at minute 0 past hour 8 every day" (8:00 AM UTC)
-    # Once a day is all you need.
     - cron: '0 8 * * *'
 
 jobs:
@@ -15,3 +13,7 @@ jobs:
           curl -X POST "${{ secrets.SUPABASE_PING_URL }}" \
           -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
           -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}"
+
+      - name: Ping Render Backend
+        run: |
+          curl -I "https://sajilo-yatra-api.onrender.com/api/v1/destinations"
