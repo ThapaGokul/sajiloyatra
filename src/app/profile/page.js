@@ -15,9 +15,8 @@ export default function ProfilePage() {
   const [bookings, setBookings] = useState([]);
   const [hostProfile, setHostProfile] = useState(null);
   const [isLoadingData, setIsLoadingData] = useState(true);
-  
-  // --- NEW: State to manage which tab is active ---
-  const [activeTab, setActiveTab] = useState('bookings'); // 'bookings' or 'host'
+  const [messages, setMessages] = useState([]);
+  const [activeTab, setActiveTab] = useState('bookings'); 
 
   useEffect(() => {
     if (user) {
@@ -42,12 +41,22 @@ export default function ProfilePage() {
     }
   }, [user]);
 
-  // Main loading spinner for auth
+  useEffect(() => {
+    if (user && hostProfile) {
+      // Only fetch messages if user is a host
+      fetch('/api/guides/messages')
+        .then(res => res.json())
+        .then(data => {
+          if (Array.isArray(data)) setMessages(data);
+        });
+    }
+  }, [user, hostProfile]);
+
+
   if (isAuthLoading) {
     return <div className={styles.loading}>Loading profile...</div>;
   }
 
-  // Prompt to log in
   if (!user) {
     return (
       <div className={styles.emptyContainer}>
@@ -105,6 +114,33 @@ export default function ProfilePage() {
     );
   };
 
+  const InquiriesContent = () => {
+    if (!hostProfile) return <div className={styles.emptyState}>You must be a host to receive inquiries.</div>;
+    
+    if (messages.length === 0) {
+      return <div className={styles.emptyState}>No inquiries yet.</div>;
+    }
+
+    return (
+      <div className={styles.bookingList}>
+        {messages.map(msg => (
+          <div key={msg.id} className={styles.bookingCard} style={{borderLeft: '4px solid #007bff'}}>
+            <h3>From: {msg.senderName}</h3>
+            <p style={{fontSize: '0.9rem', color: '#888'}}>{new Date(msg.createdAt).toLocaleDateString()}</p>
+            <p><strong>Email:</strong> {msg.senderEmail}</p>
+            <hr style={{margin: '10px 0', border: '0', borderTop: '1px solid #eee'}}/>
+            <p>{msg.content}</p>
+            <a href={`mailto:${msg.senderEmail}`} className={styles.joinButton} style={{fontSize: '0.9rem', padding: '8px 15px'}}>
+              Reply via Email
+            </a>
+          </div>
+        ))}
+      </div>
+    );
+  };
+
+
+
   // --- Main Page Render ---
   return (
     <>
@@ -129,11 +165,23 @@ export default function ProfilePage() {
           >
             My Host Profile
           </button>
+
+          {hostProfile && (
+            <button
+              className={`${styles.tabButton} ${activeTab === 'inquiries' ? styles.tabActive : ''}`}
+              onClick={() => setActiveTab('inquiries')}
+            >
+              Client Inquiries
+            </button>
+          )}
+
         </div>
 
         {/* --- Tab Content --- */}
         <div className={styles.tabContent}>
-          {activeTab === 'bookings' ? <BookingsContent /> : <HostProfileContent />}
+          {activeTab === 'bookings' && <BookingsContent />}
+          {activeTab === 'host' && <HostProfileContent />}
+          {activeTab === 'inquiries' && <InquiriesContent />}
         </div>
       </div>
     </>

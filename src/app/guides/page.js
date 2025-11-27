@@ -2,6 +2,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import PageHeader from '../../components/PageHeader';
 import LocalGuideCard from '../../components/LocalGuideCard';
 // We can reuse the same CSS module from the /locals page!
@@ -51,6 +52,13 @@ export default function GuidesPage() {
       />
 
       <div className={styles.container}>
+        <div className={styles.callToAction} style={{background: '#eef2ff', border: '1px solid #e0e7ff'}}>
+          <p style={{color: '#3730a3'}}>Are you a certified guide? Find new clients here.</p>
+          <Link href="/guides/join" className={styles.joinButton} style={{backgroundColor: '#4f46e5'}}>
+            Register as a Pro
+          </Link>
+        </div>
+
         <div className={styles.grid}>
           {guides.map(guide => (
             <LocalGuideCard 

@@ -38,7 +38,8 @@ export async function POST(request) {
       { 
         userId: user.id,
         email: user.email,
-        name: user.name 
+        name: user.name,
+        role: user.role
       },
       process.env.JWT_SECRET,
       { expiresIn: '7d' } // Token lasts for 7 days

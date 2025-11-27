@@ -178,6 +178,23 @@ const storiesData = [
 ];
 
 async function main() {
+
+  const salt = await bcrypt.genSalt(10);
+  const passwordHash = await bcrypt.hash('password123', salt);
+
+  const adminHash = await bcrypt.hash('admin123', salt);
+  await prisma.user.upsert({
+    where: { email: 'admin@sajiloyatra.me' },
+    update: {},
+    create: {
+      email: 'admin@sajiloyatra.me',
+      name: 'Super Admin',
+      passwordHash: adminHash,
+      role: 'ADMIN', 
+    },
+  });
+  console.log("Admin user created: admin@sajiloyatra.me / admin123");
+
   for (const story of storiesData) {
     await prisma.story.create({
       data: {
@@ -191,8 +208,6 @@ async function main() {
 
   console.log(`Seeding guides with unique users...`);
   
-  const salt = await bcrypt.genSalt(10);
-  const passwordHash = await bcrypt.hash('password123', salt);
   let userCounter = 1;
 
   for (const guide of guidesData) {

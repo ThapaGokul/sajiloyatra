@@ -22,7 +22,7 @@ export async function GET(request) {
     // 3. Find the user in the database (to ensure they still exist)
     const user = await prisma.user.findUnique({
       where: { id: decoded.userId },
-      select: { id: true, email: true, name: true } // Return only safe data
+      select: { id: true, email: true, name: true, role: true } // Return only safe data
     });
 
     if (!user) {

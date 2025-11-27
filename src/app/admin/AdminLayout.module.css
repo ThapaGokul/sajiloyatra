@@ -1,0 +1,85 @@
+/* /src/app/admin/AdminLayout.module.css */
+
+.container {
+  display: flex;
+  min-height: 100vh;
+  background-color: #faf9f6; /* "Alabaster" - a warm off-white */
+  font-family: "Inter", sans-serif;
+}
+
+/* --- Sidebar Styles --- */
+.sidebar {
+  width: 280px;
+  background-color: #ffffff; /* Clean white */
+  border-right: 1px solid #e5e7eb; /* Subtle separator */
+  display: flex;
+  flex-direction: column;
+  padding-top: 100px; /* Clear fixed header */
+}
+
+.sidebarTitle {
+  padding: 30px;
+  font-family: 'Georgia', serif; /* Match main site headings */
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1f2937; /* Dark Gray */
+  letter-spacing: -0.5px;
+}
+
+.sidebarTitle span {
+  color: #f59e0b; /* Telluride Gold Accent */
+}
+
+.nav {
+  flex: 1;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.navLink {
+  display: block;
+  padding: 14px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #4b5563; /* Medium Gray */
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.navLink:hover {
+  background-color: #fffbeb; /* Very light yellow background */
+  color: #b45309; /* Darker Gold text */
+  transform: translateX(5px); /* Subtle movement */
+}
+
+/* Special style for the "Exit" link */
+.exitLink {
+  margin-top: 40px;
+  border-top: 1px solid #f3f4f6;
+  color: #9ca3af;
+  font-size: 0.9rem;
+}
+
+.exitLink:hover {
+  background-color: #fee2e2; /* Light red */
+  color: #ef4444; /* Red text */
+  transform: none;
+}
+
+/* --- Main Content Styles --- */
+.mainContent {
+  flex: 1;
+  padding: 40px;
+  padding-top: 130px; /* More breathing room from header */
+}
+
+.card {
+  background: white;
+  border-radius: 12px; /* Softer corners */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03); /* Very subtle, expensive-feeling shadow */
+  padding: 40px;
+  min-height: 80vh;
+  border: 1px solid #f3f4f6;
+}

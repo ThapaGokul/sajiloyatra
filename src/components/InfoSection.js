@@ -12,8 +12,8 @@ export default function InfoSection() {
         <h2 className={styles.title}>Culture & Himalayas: A Perfect Blend</h2>
         <p>Discover an experience unlike any other. From the ancient temples of Kathmandu to the breathtaking heights of the Everest region, Nepal offers a journey for the soul. Ready for a destination you have to see to believe?</p>
         <div className={styles.buttonContainer}>
-          <Link href="#" className={styles.button}>Explore Kathmandu</Link>
-          <Link href="#" className={styles.button}>Trek Everest</Link>
+          <Link href="/destinations?type=culture" className={styles.button}>Explore Major Areas</Link>
+          <Link href="/destinations?type=trek" className={styles.button}>Find Treks & Base Camps</Link>
         </div>
         {/* --- End of updated content --- */}
       </div>

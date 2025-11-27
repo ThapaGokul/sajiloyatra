@@ -1,27 +1,26 @@
 // /src/app/destinations/page.js
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import PageHeader from '../../components/PageHeader';
 import DestinationCard from '../../components/DestinationCard';
-import RouteCard from '../../components/RouteCard'; // We will create this
-import DetailModal from '../../components/DetailModal'; // We will create this
+import RouteCard from '../../components/RouteCard';
+import DetailModal from '../../components/DetailModal'; 
 import styles from './DestinationsPage.module.css';
 
-// --- CONFIGURATION ---
-// This is your Spring Boot API
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
-// ---
 
-// --- HELPER FUNCTION TO FIX THE ERROR ---
-// This function checks if a URL is valid before we pass it to <Image>
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+
 const isValidUrl = (url) => {
   if (!url) return false;
   return url.startsWith('http://') || url.startsWith('https://');
 };
-// ---
 
-export default function DestinationsPage() {
+
+function DestinationsContent() {
+  const searchParams = useSearchParams(); 
+  const filterType = searchParams.get('type');
   const [activeView, setActiveView] = useState('destinations');
   const [allDestinations, setAllDestinations] = useState([]);
   const [allRoutes, setAllRoutes] = useState([]);
@@ -32,7 +31,6 @@ export default function DestinationsPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedDest, setSelectedDest] = useState(null);
 
-  // Fetch all data on component mount
   useEffect(() => {
     async function initializeApp() {
       setIsLoading(true);
@@ -73,12 +71,21 @@ export default function DestinationsPage() {
   // --- Filtering Logic ---
   const filteredDestinations = allDestinations.filter(dest => {
     const searchText = destSearch.toLowerCase().trim();
-    if (!searchText) return true;
-    return (
+    const matchesSearch = !searchText || (
       dest.name.toLowerCase().includes(searchText) ||
       dest.province.toLowerCase().includes(searchText) ||
       dest.category.toLowerCase().includes(searchText)
     );
+    let matchesType = true;
+    if (filterType === 'trek') {
+      // Show ONLY items with "Trekking" in the category
+      matchesType = dest.category.toLowerCase().includes('trekking');
+    } else if (filterType === 'culture') {
+      // Show items that are NOT trekking (Major Areas)
+      matchesType = !dest.category.toLowerCase().includes('trekking');
+    }
+
+    return matchesSearch && matchesType;
   });
 
   const filteredRoutes = allRoutes.filter(route => {
@@ -104,14 +111,25 @@ export default function DestinationsPage() {
         <p style={{color: 'red'}}>{error}</p>
      </div>
   );
+  let pageTitle = "Explore Nepal";
+  let pageDesc = "Find your next adventure, from serene lakes to the highest peaks.";
+  
+  if (filterType === 'trek') {
+    pageTitle = "Treks & Base Camps";
+    pageDesc = "Challenge yourself on the world's most famous trails.";
+  } else if (filterType === 'culture') {
+    pageTitle = "Major Cities & Culture";
+    pageDesc = "Immerse yourself in the history and life of Nepal.";
+  }
+
+
 
   return (
     <>
       <PageHeader
-        title="Explore Nepal"
-        description="Find your next adventure, from serene lakes to the highest peaks."
-        // Make sure you have a fallback for this hero image too!
-        imageUrl="/images/destination-hero.jpg" // You'll need a new hero image
+        title= {pageTitle}
+        description= {pageDesc}
+        imageUrl="/images/destination-hero.jpg" 
       />
 
       <main className={styles.container}>
@@ -132,6 +150,7 @@ export default function DestinationsPage() {
 
         {/* --- Destinations View --- */}
         <div style={{ display: activeView === 'destinations' ? 'block' : 'none' }}>
+
           <div className={styles.searchContainer}>
             <div className={styles.searchBox}>
               <input
@@ -178,9 +197,6 @@ export default function DestinationsPage() {
           {isLoading ? renderLoading() : (
             <div className={styles.routeList}>
               {filteredRoutes.length > 0 ? (
-                //
-                // --- THIS IS THE FIX ---
-                //
                 filteredRoutes.map(route => {
                   // 1. Check if the URL from the database is valid
                   const validImageUrl = isValidUrl(route.imageUrl)
@@ -204,9 +220,15 @@ export default function DestinationsPage() {
           )}
         </div>
       </main>
-
-      {/* --- Detail Modal --- */}
       {isModalOpen && <DetailModal destination={selectedDest} onClose={closeModal} />}
     </>
+  );
+}
+
+export default function DestinationsPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <DestinationsContent />
+    </Suspense>
   );
 }

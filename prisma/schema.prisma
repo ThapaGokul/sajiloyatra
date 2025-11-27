@@ -15,11 +15,9 @@ model User {
   email        String   @unique
   name         String
   passwordHash String // We store the hash, never the real password
+  role         String   @default("USER")
   createdAt    DateTime @default(now())
-
-  // --- Define the relationships ---
   bookings    Booking[]
-  // This creates a one-to-one link: one User can have one Guide profile
   localGuide  LocalGuide?
 }
 
@@ -90,5 +88,18 @@ model LocalGuide {
   // This must be unique to enforce the one-to-one
   userId     Int      @unique 
   user       User     @relation(fields: [userId], references: [id])
+  messages   Message[]
 
+}
+
+model Message {
+  id          Int        @id @default(autoincrement())
+  senderName  String
+  senderEmail String
+  content     String
+  createdAt   DateTime   @default(now())
+  
+  // Link to the Guide/Host receiving the message
+  guideId     Int
+  guide       LocalGuide @relation(fields: [guideId], references: [id])
 }

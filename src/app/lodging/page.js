@@ -1,7 +1,6 @@
-// [REACT COMPONENT] /src/app/lodging/page.js
-"use client"; // This makes it a Client Component
+"use client"; 
 
-import { useState, useEffect } from 'react'; // Import hooks
+import { useState, useEffect } from 'react'; 
 import PageHeader from '../../components/PageHeader';
 import LodgingCard from '../../components/LodgingCard';
 import FilterSidebar from '../../components/FilterSidebar';
@@ -19,8 +18,8 @@ export default function LodgingPage() {
     setActiveFilters(prevFilters => {
       const currentValues = prevFilters[category];
       const newValues = currentValues.includes(value)
-        ? currentValues.filter(item => item !== value) // Uncheck: remove value
-        : [...currentValues, value]; // Check: add value
+        ? currentValues.filter(item => item !== value) 
+        : [...currentValues, value]; 
       
       return {
         ...prevFilters,
@@ -32,7 +31,7 @@ export default function LodgingPage() {
   // Fetch lodgings from our API when the component mounts
   useEffect(() => {
     async function getLodgings() {
-      const response = await fetch('/api/lodging'); // No need for full URL on client-side
+      const response = await fetch('/api/lodging'); 
       if (response.ok) {
         const data = await response.json();
         setAllLodgings(data);
@@ -59,7 +58,7 @@ export default function LodgingPage() {
       );
     }
 
-    // You could add more filters here later (e.g., price, amenities)
+
 
     setFilteredLodgings(results);
   }, [activeFilters, allLodgings]); // This effect runs when filters or the main list change
