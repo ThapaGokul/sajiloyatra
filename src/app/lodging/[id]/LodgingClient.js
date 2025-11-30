@@ -2,7 +2,7 @@
 "use client";
 
 import { useState } from 'react';
-import styles from './LodgingDetail.module.css';
+import styles from './LodgingDetails.module.css';
 import PaymentPopup from '../../../components/PaymentPopup';
 import { Wifi, Coffee, Car, Wind, CheckCircle2, MapPin, Star, Heart } from 'lucide-react';
 
