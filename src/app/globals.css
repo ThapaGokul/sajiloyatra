@@ -1,6 +1,3 @@
-/* [CSS] /src/app/globals.css */
-
-/* Make sure the main containers fill the screen height */
 html,
 body {
   height: 100%;
@@ -15,10 +12,10 @@ body {
 body {
   display: flex;
   flex-direction: column;
-  min-height: 100%; /* Ensures body is at least as tall as the viewport */
+  min-height: 100%; 
 }
 
-/* This is the magic! Tell the main content area to grow and take up all available space. */
+
 main {
   flex-grow: 1;
 }

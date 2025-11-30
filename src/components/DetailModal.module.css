@@ -2,7 +2,7 @@
 .backdrop {
   position: fixed;
   inset: 0;
-  z-index: 50;
+  z-index: 2000;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -33,7 +33,7 @@
 .title {
   font-size: 1.5rem;
   font-weight: 600;
-  color: #1d4ed8;
+  color: #212121;
 }
 
 .closeButton {
@@ -62,7 +62,7 @@
 
 .modalBody::-webkit-scrollbar { width: 8px; }
 .modalBody::-webkit-scrollbar-thumb {
-  background-color: #f59e0b;
+  background-color: #8B0000;
   border-radius: 10px;
 }
 
@@ -90,7 +90,7 @@
   border: 2px solid transparent;
 }
 .thumbImage:hover {
-  border-color: #f59e0b;
+  border-color: #8B0000;
 }
 
 .detailsContent {
@@ -141,7 +141,6 @@
   gap: 4px;
 }
 
-/* --- NEW SIMPLIFIED LODGING STYLES --- */
 .lodgingTitle {
   font-size: 1.25rem;
   font-weight: 600;
@@ -164,7 +163,6 @@
   gap: 16px;
 }
 
-/* This makes the whole card a clickable link */
 .hotelLink {
   text-decoration: none;
   color: inherit;

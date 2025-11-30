@@ -10,6 +10,7 @@ export default function LodgingPage() {
   const [allLodgings, setAllLodgings] = useState([]);
   const [filteredLodgings, setFilteredLodgings] = useState([]);
   const [availableAreas, setAvailableAreas] = useState([]);
+  const [showMobileFilters, setShowMobileFilters] = useState(false);
   const [activeFilters, setActiveFilters] = useState({
     area: [], 
   });
@@ -46,12 +47,11 @@ export default function LodgingPage() {
       }
     }
     getLodgings();
-  }, []); // The empty array [] means this effect runs only once
+  }, []); 
 
     useEffect(() => {
-    let results = [...allLodgings]; // Start with all lodgings
+    let results = [...allLodgings]; 
 
-    // Apply area filter
     if (activeFilters.area.length > 0) {
       results = results.filter(lodging => 
         activeFilters.area.includes(lodging.area)
@@ -61,8 +61,7 @@ export default function LodgingPage() {
 
 
     setFilteredLodgings(results);
-  }, [activeFilters, allLodgings]); // This effect runs when filters or the main list change
-
+  }, [activeFilters, allLodgings]); 
   return (
     <div>
       <PageHeader
@@ -73,11 +72,21 @@ export default function LodgingPage() {
 
       <div className={styles.container}>
         <div className={styles.mainContent}>
-          <div className={styles.sidebar}>
+          <button 
+            className={styles.mobileFilterToggle} 
+            onClick={() => setShowMobileFilters(!showMobileFilters)}
+          >
+            {showMobileFilters ? 'Close Filters' : 'Show Filters'} 
+            {activeFilters.area.length > 0 && ` (${activeFilters.area.length})`}
+          </button>
+
+
+          <div className={`${styles.sidebar} ${showMobileFilters ? styles.show : ''}`}>
             <FilterSidebar
               activeFilters={activeFilters}
               onFilterChange={handleFilterChange}
               availableAreas={availableAreas}
+              onClose={() => setShowMobileFilters(false)}
             />
           </div>
           <div className={styles.resultsGrid}>

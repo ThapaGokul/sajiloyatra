@@ -1,15 +1,14 @@
-// /src/app/login/page.js
 "use client";
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import styles from '../auth/AuthForm.module.css';
-import { useAuth } from '../../context/AuthContext'; // <-- 1. IMPORT useAuth
+import { useAuth } from '../../context/AuthContext'; 
 
 export default function LoginPage() {
   const router = useRouter();
-  const { refetchUser } = useAuth(); // <-- 2. GET THE REFETCH FUNCTION
+  const { refetchUser } = useAuth(); 
   
   const [formData, setFormData] = useState({
     email: '',
@@ -42,13 +41,9 @@ export default function LoginPage() {
         setMessage("Login successful! Redirecting...");
         setIsError(false);
         
-        // --- 3. THIS IS THE FIX ---
-        // Manually tell the AuthContext to get the new user data
         await refetchUser(); 
-        
-        // Now redirect to the homepage
+       
         router.push('/');
-        // We don't need router.refresh() anymore
       } else {
         const data = await response.json();
         setMessage(data.error || 'Login failed');
@@ -61,7 +56,6 @@ export default function LoginPage() {
     }
   };
 
-  // ... (rest of your JSX is the same) ...
   return (
     <div className={styles.container}>
       <div className={styles.formWrapper}>
@@ -101,6 +95,19 @@ export default function LoginPage() {
 
           <button type="submit" className={styles.button}>
             Login
+          </button>
+
+          <div className={styles.divider}>
+            <span>OR</span>
+          </div>
+
+          <button 
+            type="button" 
+            className={styles.googleButton} 
+            onClick={() => window.location.href = '/api/auth/google/init'}
+          >
+            <img src="https://authjs.dev/img/providers/google.svg" alt="Google" className={styles.googleIcon} />
+            Continue with Google
           </button>
 
           <Link href="/register" className={styles.link}>

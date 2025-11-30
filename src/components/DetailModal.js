@@ -1,8 +1,35 @@
-// /src/components/DetailModal.js
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './DetailModal.module.css';
+
+const HUB_MAPPING = {
+  "Phewa Lake": "Pokhara",
+  "Davis Falls": "Pokhara",
+  "World Peace Pagoda": "Pokhara",
+  "Sarangkot Viewpoint": "Pokhara",
+  "Gupteshwor Mahadev Cave": "Pokhara",
+  "Bindhyabasini Temple": "Pokhara",
+  "Mahendra Cave": "Pokhara",
+  "Bat Cave (Chamere Gufa)": "Pokhara",
+  "International Mountain Museum": "Pokhara",
+  "Begnas Lake": "Pokhara",
+  "Tal Barahi Temple": "Pokhara",
+  "Gurkha Memorial Museum": "Pokhara",
+
+  "Kanyam Tea Garden": "Ilam",
+  "Antu Danda": "Ilam",
+  "Mai Pokhari": "Ilam",
+  "Sandakpur": "Ilam",
+
+  "Gorkha Durbar": "Gorkha",
+  "Manakamana Temple": "Gorkha",
+  "Barpak Village": "Gorkha",
+
+  "Swayambhunath": "Kathmandu",
+  "Pashupatinath": "Kathmandu",
+  "Boudhanath": "Kathmandu"
+};
 
 export default function DetailModal({ destination, onClose }) {
   const [mainImage, setMainImage] = useState(
@@ -11,12 +38,10 @@ export default function DetailModal({ destination, onClose }) {
       : `https://placehold.co/600x400/EFEFEF/333?text=${encodeURIComponent(destination.name)}`
   );
 
-  // --- State for the lodgings ---
   const [lodgings, setLodgings] = useState([]);
   const [isLoadingLodgings, setIsLoadingLodgings] = useState(true);
 
 
-  // Update main image if the destination prop changes
   useEffect(() => {
     setMainImage(
       (destination.imageUrls && destination.imageUrls.length > 0)
@@ -25,17 +50,15 @@ export default function DetailModal({ destination, onClose }) {
     );
   }, [destination]);
 
-  // Effect to fetch lodgings when the modal opens
- // --- 2. THIS IS THE UPDATED USEEFFECT ---
+
   useEffect(() => {
-    // We now fetch based on destination.name, which links to our 'area' field
     if (destination.name) {
       setIsLoadingLodgings(true);
       
       async function fetchLodgings() {
         try {
-          // Fetch from our new Next.js API endpoint
-          const response = await fetch(`/api/lodging/by-area?area=${encodeURIComponent(destination.name)}`);
+         const searchArea = HUB_MAPPING[destination.name] || destination.name;
+          const response = await fetch(`/api/lodging/by-area?area=${encodeURIComponent(searchArea)}`);
           if (!response.ok) {
             throw new Error('Failed to fetch lodgings');
           }
@@ -116,18 +139,16 @@ export default function DetailModal({ destination, onClose }) {
                 <li>No key attractions listed.</li>
               )}
             </ul>
-            {/* --- END OF RESTORED CODE --- */}
+    
 
 
             {/* --- RECOMMENDED LODGING --- */}
-           {/* --- 3. UPDATED LODGING SECTION --- */}
             <h4 className={styles.lodgingTitle}>Recommended Lodging</h4>
             {isLoadingLodgings ? (
               <p className={styles.loadingText}>Loading lodgings...</p>
             ) : lodgings.length > 0 ? (
               <div className={styles.lodgingList}>
                 {lodgings.map((hotel) => (
-                  // Wrap the card in a Link to our booking page
                   <Link href={`/lodging/${hotel.id}`} key={hotel.id} className={styles.hotelLink}>
                     <div className={styles.hotelCard}>
                       <Image
@@ -139,7 +160,6 @@ export default function DetailModal({ destination, onClose }) {
                       />
                       <div className={styles.hotelContent}>
                         <h5>{hotel.name}</h5>
-                        {/* We use the description from our database */}
                         <p>{hotel.description}</p>
                       </div>
                     </div>
@@ -149,7 +169,6 @@ export default function DetailModal({ destination, onClose }) {
             ) : (
               <p className={styles.loadingText}>No local lodgings found for this destination.</p>
             )}
-            {/* --- END OF LODGING SECTION --- */}
 
           </div>
         </div>

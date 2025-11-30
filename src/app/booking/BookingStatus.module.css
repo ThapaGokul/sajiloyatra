@@ -47,7 +47,7 @@
   display: inline-block;
   margin-top: 20px;
   padding: 12px 25px;
-  background-color: #007bff;
+  background-color:  #8B0000;
   color: white;
   text-decoration: none;
   border-radius: 5px;
@@ -56,5 +56,5 @@
 }
 
 .button:hover {
-  background-color: #0056b3;
+  background-color:  #7e0101;
 }

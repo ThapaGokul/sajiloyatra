@@ -1,13 +1,9 @@
-// /src/components/SeatLayout.js
 "use client";
 
 import { useState } from 'react';
 import styles from './SeatLayout.module.css';
 
-// Dummy data for which seats are already booked
 const alreadyBooked = ['1A', '1B', '3C', '4D'];
-
-// Create seat labels (e.g., 1A, 1B, 1C, 1D ... 10A, 10B, 10C, 10D)
 const seats = [];
 for (let i = 1; i <= 10; i++) {
   seats.push(i + 'A', i + 'B', 'aisle', i + 'C', i + 'D');
@@ -27,9 +23,9 @@ export default function SeatLayout({ selectedSeats, onSeatSelected }) {
 
   const handleSeatClick = (seat) => {
     if (alreadyBooked.includes(seat)) {
-      return; // Do nothing if seat is already booked
+      return; 
     }
-    onSeatSelected(seat); // Let the parent page handle the logic
+    onSeatSelected(seat); 
   };
 
   return (

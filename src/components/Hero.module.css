@@ -1,9 +1,6 @@
 /* [CSS MODULE] /src/components/Hero.module.css */
 .hero {
-  /* This is the magic property. 100vh means 100% of the viewport height. */
   height: 100vh;
-  
-  /* We use flexbox to perfectly center the text vertically and horizontally */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -21,11 +18,29 @@
 }
 
 .title {
-  font-size: 4rem; /* Let's make the title bigger to match the inspiration */
+  font-size: 4rem; 
   margin-bottom: 10px;
 }
 
 .subtitle {
   font-size: 1.3rem;
   font-weight: 300;
+}
+@media (max-width: 768px) {
+  .hero {
+    min-height: 100vh;
+    height: auto;
+    padding-top: 50px; 
+    padding-bottom: 60px;
+  }
+
+  .title {
+    font-size: 2.5rem; 
+    line-height: 1.2;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    padding: 0 20px; 
+  }
 }

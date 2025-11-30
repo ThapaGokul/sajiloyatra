@@ -5,8 +5,8 @@ import PromoSection from '../components/PromoSection';
 import styles from './page.module.css';
 import Link from 'next/link';
 import SeasonalGuide from '../components/SeasonalGuide';
-import StoryCard from '../components/StoryCard';
 import InfoSection from '../components/InfoSection';
+import TravelerStory from '../components/TravelerStory';
 
 const getBaseUrl = () => {
 
@@ -55,24 +55,7 @@ export default async function Home() {
       <PromoSection />
       <InfoSection />
       <SeasonalGuide />
-
-      <section className={styles.container}>
-        <h2>Stories from the Trail</h2>
-        <div className={styles.trekList}>
-          {storiesData.length > 0 ? (
-            storiesData.map(story => (
-              <StoryCard
-                key={story.id}
-                title={story.title}
-                author={story.author}
-                imageUrl={story.imageUrl}
-              />
-            ))
-          ) : (
-            <p>No stories found. Please check the backend connection.</p>
-          )}
-        </div>
-      </section>
+      <TravelerStory/>
     </main>
   );
 }

@@ -1,9 +1,8 @@
-// /src/components/ProfessionalGuideForm.js
 "use client";
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import styles from './LocalHostForm.module.css'; // We can reuse the same CSS!
+import styles from './LocalHostForm.module.css'; 
 
 export default function ProfessionalGuideForm() {
   const router = useRouter();
@@ -46,7 +45,6 @@ export default function ProfessionalGuideForm() {
     data.append('bio', formData.bio);
     data.append('imageUrl', file);
     
-    // --- CRITICAL CHANGE: THIS IS A PROFESSIONAL ---
     data.append('type', 'PROFESSIONAL'); 
 
     const response = await fetch('/api/locals', {
@@ -58,7 +56,7 @@ export default function ProfessionalGuideForm() {
       setMessage('Professional Profile created! Redirecting...');
       setIsError(false);
       setTimeout(() => {
-        router.push('/guides'); // Redirect to the GUIDES list
+        router.push('/guides'); 
       }, 2000);
     } else {
       const resData = await response.json();

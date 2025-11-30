@@ -1,0 +1,127 @@
+.section {
+  max-width: 1100px;
+  margin: 80px auto;
+  padding: 0 20px;
+  font-family: "Inter", sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 40px;
+}
+
+.titleGroup {
+  text-align: center;
+  flex: 1;
+}
+
+.title {
+  font-family: 'Georgia', serif; 
+  font-size: 3rem;
+  color: #8B0000; 
+  margin-bottom: 10px;
+  font-weight: 400;
+}
+
+.subtitle {
+  color: #555;
+  font-size: 1rem;
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+}
+
+.arrowButton {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #ccc;
+  background: white;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #555;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arrowButton:hover {
+  border-color: #333;
+  color: #000;
+}
+
+
+.card {
+  background-color:#f0eeee; 
+  padding: 60px;
+  position: relative; 
+}
+
+.cardContent {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.imageWrapper {
+  flex: 0 0 300px; 
+  height: 300px;
+  position: relative;
+  border: 5px solid white; 
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.image {
+  object-fit: cover;
+}
+
+.textWrapper {
+  flex: 1;
+}
+
+.quote {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #4a4a4a;
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+.author {
+  display: block;
+  color:  #212121; 
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+
+/* --- MOBILE --- */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .cardContent {
+    flex-direction: column;
+    text-align: center;
+    gap: 30px;
+  }
+
+  .card {
+    padding: 30px;
+  }
+  
+  .imageWrapper {
+    width: 100%;
+    height: 250px;
+    flex: auto;
+  }
+}

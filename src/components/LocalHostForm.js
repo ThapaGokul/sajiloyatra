@@ -1,4 +1,3 @@
-// /src/components/LocalHostForm.js
 "use client";
 
 import { useState } from 'react';
@@ -7,8 +6,6 @@ import styles from './LocalHostForm.module.css';
 
 export default function LocalHostForm() {
   const router = useRouter();
-  
-  // 1. State for text fields
   const [formData, setFormData] = useState({
     name: '',
     location: 'Kathmandu',
@@ -16,7 +13,6 @@ export default function LocalHostForm() {
     bio: '',
   });
   
-  // 2. Separate state for the file
   const [file, setFile] = useState(null);
   
   const [message, setMessage] = useState(null);
@@ -30,7 +26,6 @@ export default function LocalHostForm() {
     }));
   };
 
-  // 3. New handler for the file input
   const handleFileChange = (e) => {
     if (e.target.files) {
       setFile(e.target.files[0]);
@@ -54,12 +49,11 @@ export default function LocalHostForm() {
     data.append('location', formData.location);
     data.append('specialty', formData.specialty);
     data.append('bio', formData.bio);
-    data.append('imageUrl', file); // 'imageUrl' must match the key in the API
+    data.append('imageUrl', file); 
     data.append('type', 'HOST');
 
     const response = await fetch('/api/locals', {
       method: 'POST',
-      // 5. Do NOT set Content-Type, browser does it for FormData
       body: data, 
     });
 
@@ -124,13 +118,12 @@ export default function LocalHostForm() {
         ></textarea>
       </div>
 
-      {/* 6. THIS IS THE UPDATED FILE INPUT */}
       <div className={styles.inputGroup}>
         <label htmlFor="imageUrl">Profile Photo</label>
         <input
           type="file" id="imageUrl" name="imageUrl"
           className={styles.input}
-          accept="image/png, image/jpeg" // Only allow images
+          accept="image/png, image/jpeg" 
           onChange={handleFileChange} required
         />
       </div>

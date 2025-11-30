@@ -1,4 +1,3 @@
-// [REACT COMPONENT] /src/components/TripPlannerNav.js
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from './TripPlannerNav.module.css';

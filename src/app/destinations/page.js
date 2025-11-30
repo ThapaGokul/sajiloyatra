@@ -1,4 +1,3 @@
-// /src/app/destinations/page.js
 "use client";
 
 import { useState, useEffect, Suspense } from 'react';
@@ -58,7 +57,6 @@ function DestinationsContent() {
     initializeApp();
   }, []);
 
-  // --- Modal Logic ---
   const openModal = (destination) => {
     setSelectedDest(destination);
     setIsModalOpen(true);
@@ -68,7 +66,6 @@ function DestinationsContent() {
     setSelectedDest(null);
   };
 
-  // --- Filtering Logic ---
   const filteredDestinations = allDestinations.filter(dest => {
     const searchText = destSearch.toLowerCase().trim();
     const matchesSearch = !searchText || (
@@ -198,15 +195,11 @@ function DestinationsContent() {
             <div className={styles.routeList}>
               {filteredRoutes.length > 0 ? (
                 filteredRoutes.map(route => {
-                  // 1. Check if the URL from the database is valid
                   const validImageUrl = isValidUrl(route.imageUrl)
                     ? route.imageUrl
-                    : '/images/default-route-fallback.jpg'; // <-- Provide a safe fallback image
-
-                  // 2. Create a new, *safe* route object to pass as a prop
+                    : '/images/default-route-fallback.jpg'; 
                   const safeRoute = { ...route, imageUrl: validImageUrl };
                   
-                  // 3. Pass the *safe* object. This prevents the error.
                   return (
                     <RouteCard key={route.id} route={safeRoute} />
                   );

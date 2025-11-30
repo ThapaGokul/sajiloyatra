@@ -52,13 +52,13 @@
 .price {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #007bff;
+  color: #8B0000;
   margin-bottom: 10px;
 }
 
 .bookButton {
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: #8B0000;
   color: white;
   border: none;
   border-radius: 5px;
@@ -69,7 +69,7 @@
 }
 
 .bookButton:hover {
-  background-color: #0056b3;
+  background-color: #7e0101;
 }
 
 @media (max-width: 600px) {

@@ -62,7 +62,7 @@
 .content h5 {
   font-size: 1.5rem; /* text-2xl */
   font-weight: 700; /* font-bold */
-  color: #1d4ed8; /* text-blue-700 */
+  color: black; /* text-blue-700 */
   margin-bottom: 8px; /* mb-2 */
 }
 
@@ -83,13 +83,13 @@
 }
 
 .learnMoreButton {
-  color: #ca8a04; /* text-yellow-600 */
-  font-weight: 600; /* font-semibold */
+  color: #8B0000;
+  font-weight: 600; 
   background: none;
   border: none;
   cursor: pointer;
 }
 
 .learnMoreButton:hover {
-  color: #a16207; /* text-yellow-800 */
+  color: #8B0000;
 }

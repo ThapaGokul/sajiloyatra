@@ -16,4 +16,74 @@
 }
 .sidebar {
   flex: 1;
+  align-self: start; 
+  position: sticky;
+  top: 100px;
 }
+.mobileFilterToggle {
+  display: none;
+}
+@media (max-width: 768px) {
+  .container {
+    padding: 30px;
+  }
+  .mainContent {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+  .mobileFilterToggle {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    margin-bottom: 10px;
+    /* Add an icon feel */
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  }
+  
+  .mobileFilterToggle:hover {
+    background-color: #f9f9f9;
+  }
+
+  .sidebar {
+   display: none; /* Hidden */
+    
+    /* Fixed Overlay Styles */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh; 
+    background-color: white;
+    z-index: 2000; 
+    padding: 20px;
+    overflow-y: auto;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  }
+  .sidebar.show {
+    display: block;
+    animation: slideDown 0.3s ease-out;
+  }
+
+  .resultsGrid {
+    grid-template-columns: 1fr; 
+  }
+}
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

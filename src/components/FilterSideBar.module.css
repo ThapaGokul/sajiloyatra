@@ -1,7 +1,9 @@
 .sidebar {
-  padding: 20px;
   background: #f9f9f9;
   border-radius: 8px;
+}
+.filterGroup {
+  margin-bottom: 20px;
 }
 .filterGroup h4 {
   margin-top: 0;
@@ -10,8 +12,50 @@
 .filterOption {
   display: flex;
   align-items: center;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
+  font-size: 1rem;
 }
 .filterOption input {
-  margin-right: 10px;
+  width: 20px;
+  height: 20px;
+  margin-right: 12px;
+  accent-color: #007bff;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+.loadingFilters {
+  font-size: 0.9rem;
+  color: #888;
+  font-style: italic;
+}
+
+.viewResultsBtn, 
+.closeIcon {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  
+  .viewResultsBtn {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    background-color: #8B0000; 
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
 }

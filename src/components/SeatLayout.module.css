@@ -38,9 +38,9 @@
 }
 
 .seat.selected {
-  background: #007bff;
+  background: #8B0000;
   color: white;
-  border-color: #007bff;
+  border-color: #8B0000;
 }
 
 .seat.booked {

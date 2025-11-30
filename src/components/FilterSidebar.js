@@ -1,7 +1,7 @@
 // /src/components/FilterSidebar.js
 import styles from './FilterSideBar.module.css';
 
-export default function FilterSidebar({ activeFilters, onFilterChange, availableAreas }) {
+export default function FilterSidebar({ activeFilters, onFilterChange, availableAreas, onClose }) {
   
   const handleCheckboxChange = (event) => {
     const { name, value } = event.target;
@@ -32,6 +32,9 @@ export default function FilterSidebar({ activeFilters, onFilterChange, available
         )}
         
       </div>
+      <button className={styles.viewResultsBtn} onClick={onClose}>
+        View Results
+      </button>
     </aside>
   );
 }

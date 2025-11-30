@@ -1,18 +1,15 @@
-// /src/components/PageHeader.js
 import Image from 'next/image';
-// Import our new CSS module
 import styles from './PageHeader.module.css';
 
 const PageHeader = ({ imageUrl, title, description }) => {
   return (
     <section>
-      {/* Use the styles from our CSS module file */}
       <div className={styles.heroContainer}>
         <Image
           src={imageUrl}
           alt={`${title} hero image`}
-          fill // Use the new 'fill' prop
-          className={styles.heroImage} // Apply the 'object-fit' style
+          fill 
+          className={styles.heroImage} 
           priority
         />
       </div>

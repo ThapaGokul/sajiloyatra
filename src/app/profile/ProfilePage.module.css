@@ -31,8 +31,8 @@
 }
 
 .tabActive {
-  color: #007bff; /* Our app's primary blue color */
-  border-bottom-color: #007bff;
+  color: #8B0000;
+  border-bottom-color:#8B0000;
 }
 
 .tabContent {
@@ -105,7 +105,7 @@
 }
 
 .loginLink {
-  color: #007bff;
+  color: #8B0000;
   font-weight: 600;
 }
 
@@ -113,7 +113,7 @@
   display: inline-block;
   margin-top: 15px;
   padding: 12px 30px;
-  background-color: #007bff; /* Consistent blue button */
+  background-color: #8B0000;
   color: white;
   text-decoration: none;
   border-radius: 5px;
@@ -123,5 +123,5 @@
 }
 
 .ctaButton:hover {
-  background-color: #0056b3;
+  background-color: #7e0101;
 }

@@ -4,7 +4,10 @@
   justify-content: center;
   align-items: center;
   min-height: 80vh;
-  padding: 40px 20px;
+  padding-top: 140px;
+  padding-bottom: 40px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .formWrapper {
@@ -47,7 +50,7 @@
 .button {
   width: 100%;
   padding: 15px;
-  background-color: #007bff;
+  background-color:  #8B0000;;
   color: white;
   border: none;
   border-radius: 5px;
@@ -58,14 +61,14 @@
 }
 
 .button:hover {
-  background-color: #0056b3;
+  background-color:  #7e0101;
 }
 
 .link {
   display: block;
   text-align: center;
   margin-top: 20px;
-  color: #007bff;
+  color:  #8B0000;
   text-decoration: none;
 }
 
@@ -88,4 +91,43 @@
 .success {
   background-color: #d4edda;
   color: #155724;
+}
+
+.divider {
+  margin: 20px 0;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  line-height: 0.1em;
+  color: #666;
+}
+
+.divider span {
+  background: #fff;
+  padding: 0 10px;
+}
+
+.googleButton {
+  width: 100%;
+  padding: 12px;
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: background-color 0.2s;
+}
+
+.googleButton:hover {
+  background-color: #f5f5f5;
+}
+
+.googleIcon {
+  width: 20px;
+  height: 20px;
 }

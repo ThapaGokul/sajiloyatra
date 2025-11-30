@@ -1,0 +1,58 @@
+/* /src/app/travel-guide/TravelGuide.module.css */
+.container {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+.section {
+  margin-bottom: 50px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #eee;
+}
+
+.section:last-child {
+  border-bottom: none;
+}
+
+.heading {
+  font-family: 'Georgia', serif;
+  font-size: 2rem;
+  color: #1f2937;
+  margin-bottom: 20px;
+}
+
+.text {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #4b5563;
+  margin-bottom: 20px;
+}
+
+.list {
+  list-style: disc;
+  padding-left: 20px;
+  margin-bottom: 20px;
+  color: #4b5563;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.list li {
+  margin-bottom: 10px;
+}
+
+.highlightBox {
+  background-color: #fffbeb; 
+  border-left: 5px solid #8B0000; 
+  padding: 20px;
+  margin: 30px 0;
+  border-radius: 4px;
+}
+
+.highlightTitle {
+  font-weight: bold;
+  color: #92400e;
+  display: block;
+  margin-bottom: 5px;
+}

@@ -1,4 +1,3 @@
-// /src/context/AuthContext.js
 "use client";
 
 import { createContext, useState, useEffect, useContext } from 'react';
@@ -11,7 +10,6 @@ export function AuthProvider({ children }) {
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
-  // 1. EXTRACT YOUR FETCH LOGIC
   const fetchUser = async () => {
     try {
       const response = await fetch('/api/auth/me');
@@ -30,7 +28,7 @@ export function AuthProvider({ children }) {
     }
   };
 
-  // 2. CALL IT ON PAGE LOAD
+  
   useEffect(() => {
     fetchUser();
   }, []);
@@ -46,7 +44,6 @@ export function AuthProvider({ children }) {
     }
   };
 
-  // 3. PROVIDE THE 'fetchUser' FUNCTION AS 'refetchUser'
   return (
     <AuthContext.Provider value={{ user, isLoading, logout, refetchUser: fetchUser }}>
       {children}

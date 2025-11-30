@@ -1,5 +1,4 @@
-// [REACT COMPONENT] /src/components/SeasonCard.js
-import Image from 'next/image'; // 1. Import the special Image component
+import Image from 'next/image'; 
 import styles from './SeasonCard.module.css';
 
 export default function SeasonCard({ season, description, imageUrl }) {

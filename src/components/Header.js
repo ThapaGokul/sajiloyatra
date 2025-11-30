@@ -3,13 +3,16 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import styles from './Header.module.css';
-import { useAuth } from '../context/AuthContext'; // Import the useAuth hook
+import { useAuth } from '../context/AuthContext'; 
+import WeatherModal from './WeatherModal';
 
 export default function Header() {
-  const { user, logout, isLoading } = useAuth(); // Get auth state and functions
+  const { user, logout, isLoading } = useAuth(); 
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,18 +27,26 @@ export default function Header() {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-
-  const headerClassName = `${styles.header} ${isScrolled ? styles.solid : ''}`;
+  const isHotelDetailPage = pathname.startsWith('/lodging/') && pathname !== '/lodging';
+  const isSolid = isScrolled || pathname === '/register' || pathname === '/login' || pathname === '/contact' || isHotelDetailPage;
+  const headerClassName = `${styles.header} ${isSolid ? styles.solid : ''}`;
   const navClassName = `${styles.nav} ${isMenuOpen ? styles.open : ''}`;
+
+  const [showWeather, setShowWeather] = useState(false);
 
   return (
     <header className={headerClassName}>
 
   
       <div className={styles.utilityNav}>
-        <Link href="#">Visitor Guide</Link>
+        <Link href="/travel-guide">Visitor Guide</Link>
         <Link href="#">Blog</Link>
-        <Link href="#">Weather</Link>
+        <button 
+          onClick={() => setShowWeather(true)} 
+          style={{background:'none', border:'none', color:'white', cursor:'pointer', font:'inherit', marginRight: '5px'}}
+        >
+          Weather
+        </button>
       </div>
       <div className={styles.mainNav}>
         <Link href="/" className={styles.logo}>
@@ -43,14 +54,12 @@ export default function Header() {
             <path d="M3 20h18L12 4 3 20zm4-4l5-9 5 9H7z" />
           </svg>
 
-          {/* A div to hold the stacked text */}
           <div className={styles.logoText}>
             <span>SAJILO</span>
             <span>YATRA</span>
           </div>
         </Link>
 
-        {/* The Hamburger Button */}
         <button className={styles.hamburger} onClick={() => setIsMenuOpen(!isMenuOpen)}>
           <svg viewBox="0 0 100 80" width="25" height="25">
             <rect width="100" height="15"></rect>
@@ -59,7 +68,6 @@ export default function Header() {
           </svg>
         </button>
 
-        {/* The Navigation */}
         <nav className={navClassName}>
           <Link href="/">Home</Link>
           <Link href="/destinations">Destinations</Link>
@@ -74,7 +82,6 @@ export default function Header() {
               </>
             ) : (
               <>
-                {/* --- Links for Logged-out Users --- */}
                 <Link href="/login">Login</Link>
                 <Link href="/register">Register</Link>
               </>
@@ -82,6 +89,7 @@ export default function Header() {
           )}
         </nav>
       </div>
+      {showWeather && <WeatherModal onClose={() => setShowWeather(false)} />}
     </header>
   );
 }

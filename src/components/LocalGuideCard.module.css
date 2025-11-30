@@ -28,7 +28,7 @@
 
 .location {
   font-size: 0.9rem;
-  color: #007bff;
+  color: #8B0000;
   font-weight: bold;
   margin-bottom: 15px;
 }
@@ -54,7 +54,7 @@
 .contactButton {
   width: 100%;
   padding: 12px;
-  background-color: #007bff;
+  background-color: #8B0000;
   color: white;
   border: none;
   border-radius: 5px;

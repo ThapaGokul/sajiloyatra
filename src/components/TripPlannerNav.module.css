@@ -1,7 +1,6 @@
-/* [CSS MODULE] /src/components/TripPlannerNav.module.css */
 .container {
   padding: 60px 20px;
-  background-color: #ffffff; /* Let's keep a subtle white background for this section */
+  background-color: #f9f9f9;
 }
 
 .grid {
@@ -13,8 +12,8 @@
 
 .navItem {
   position: relative;
-  width: 280px;   /* Changed */
-  height: 220px;  /* Changed */
+  width: 280px;  
+  height: 220px;  
   border-radius: 12px;
   overflow: hidden;
   color: white;
@@ -56,9 +55,9 @@
 
 .title {
   font-weight: bold;
-  font-size: 1.5rem; /* Changed */
+  font-size: 1.5rem;
   position: relative;
   z-index: 3;
-  padding: 15px; /* Changed */
-  width: 100%; /* Ensure padding is applied correctly */
+  padding: 15px; 
+  width: 100%; 
 }

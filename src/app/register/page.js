@@ -45,7 +45,6 @@ export default function RegisterPage() {
       if (response.ok) {
         setMessage("Registration successful! Redirecting to login...");
         setIsError(false);
-        // Redirect to login page after a short delay
         setTimeout(() => {
           router.push('/login');
         }, 2000);
@@ -114,6 +113,17 @@ export default function RegisterPage() {
           <button type="submit" className={styles.button}>
             Register
           </button>
+
+          <div className={styles.divider}>
+          <span>OR</span>
+        </div>
+
+        <button type="button" className={styles.googleButton} onClick={() => window.location.href = '/api/auth/google/init'}>
+          <img src="https://authjs.dev/img/providers/google.svg" alt="Google" className={styles.googleIcon} />
+          Continue with Google
+        </button>
+
+
 
           <Link href="/login" className={styles.link}>
             Already have an account? Login
