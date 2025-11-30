@@ -26,9 +26,9 @@
   font-size: 1.3rem;
   font-weight: 300;
 }
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .hero {
-    min-height: 100vh;
+    min-height: 45vh;
     height: auto;
     padding-top: 50px; 
     padding-bottom: 60px;
