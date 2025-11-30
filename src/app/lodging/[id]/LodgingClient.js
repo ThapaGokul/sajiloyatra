@@ -5,6 +5,7 @@ import { useState } from 'react';
 import styles from './LodgingDetails.module.css';
 import PaymentPopup from '../../../components/PaymentPopup';
 import { Wifi, Coffee, Car, Wind, CheckCircle2, MapPin, Star, Heart } from 'lucide-react';
+import Link from 'next/link';
 
 // Helper for icons
 const getAmenityIcon = (amenity) => {
@@ -36,7 +37,7 @@ export default function LodgingClient({ lodging }) {
       {/* 1. TOP BAR */}
       <div className={styles.topBar}>
         <nav className={styles.breadcrumbNav}>
-          <a href="/lodging">Lodgings</a> &gt; <span>{lodging.area}</span>
+          <Link href="/lodging">Lodgings</Link> &gt; <span>{lodging.area}</span>
         </nav>
       </div>
 
@@ -96,7 +97,7 @@ export default function LodgingClient({ lodging }) {
           
           <div className={styles.rightColumn} id="location">
             <section className={styles.locationSection}>
-              <h2>What's nearby</h2>
+              <h2>What&apos;s nearby</h2>
               
               <div className={styles.mapContainer}>
                 <iframe
