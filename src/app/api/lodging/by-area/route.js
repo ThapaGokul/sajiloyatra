@@ -1,4 +1,3 @@
-// /src/app/api/lodging/by-area/route.js
 import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 
@@ -13,8 +12,7 @@ export async function GET(request) {
       return NextResponse.json({ error: 'Area parameter is required' }, { status: 400 });
     }
 
-    // This finds all lodgings where the 'area' field
-    // exactly matches the destination's 'name'
+   
     const lodgings = await prisma.lodging.findMany({
       where: {
         area: area,

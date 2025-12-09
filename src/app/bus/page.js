@@ -1,4 +1,3 @@
-// /src/app/bus/page.js
 "use client";
 
 import PageHeader from '../../components/PageHeader';
@@ -18,7 +17,6 @@ export default function BusPage() {
         <BusSearchForm />
       </div>
 
-      {/* We can add more content here later, like "Why Book With Us" */}
     </div>
   );
 }

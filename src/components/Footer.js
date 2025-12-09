@@ -1,4 +1,4 @@
-// [REACT COMPONENT] /src/components/Footer.js
+
 import styles from './Footer.module.css';
 import Link from 'next/link';
 

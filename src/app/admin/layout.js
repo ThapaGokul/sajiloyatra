@@ -1,4 +1,4 @@
-// /src/app/admin/layout.js
+
 "use client";
 
 import { useAuth } from '../../context/AuthContext';

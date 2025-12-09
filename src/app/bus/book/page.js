@@ -1,9 +1,7 @@
-// /src/app/bus/book/page.js
 import { Suspense } from 'react';
 import BusBookClient from './BusBookClient';
-import styles from './BusBook.module.css'; // We might need this for a loading style
+import styles from './BusBook.module.css'; 
 
-// This is a simple fallback component
 function LoadingFallback() {
   return (
     <div className={styles.container}>

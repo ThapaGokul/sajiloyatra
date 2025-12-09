@@ -1,4 +1,3 @@
-// [NODE.JS BACKEND LOGIC] /prisma/seed.js
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
 const prisma = new PrismaClient();
@@ -373,7 +372,7 @@ async function main() {
     await prisma.localGuide.create({
       data: {
         ...guide,
-        userId: dummyUser.id, // This is now unique every time
+        userId: dummyUser.id, 
       },
     });
     

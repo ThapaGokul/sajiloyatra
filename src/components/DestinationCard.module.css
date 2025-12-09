@@ -1,8 +1,7 @@
-/* /src/components/DestinationCard.module.css */
 .card {
   background: white;
-  border-radius: 8px; /* from rounded-lg */
-  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); /* from shadow-lg */
+  border-radius: 8px; 
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); 
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -15,7 +14,7 @@
 .imageContainer {
   position: relative;
   cursor: pointer;
-  height: 256px; /* h-64 */
+  height: 256px; 
 }
 
 .image {
@@ -36,16 +35,16 @@
 }
 
 .imageContainer:hover .imageOverlay {
-  opacity: 0.4; /* bg-opacity-40 */
+  opacity: 0.4;
 }
 
 .overlayText {
   color: white;
-  font-size: 1.125rem; /* text-lg */
-  font-weight: 600; /* font-semibold */
-  border-radius: 99px; /* rounded-full */
+  font-size: 1.125rem;
+  font-weight: 600; 
+  border-radius: 99px; 
   background: rgba(0, 0, 0, 0.5);
-  padding: 8px 16px; /* px-4 py-2 */
+  padding: 8px 16px; 
   opacity: 0;
   transition: opacity 0.3s;
 }
@@ -55,31 +54,31 @@
 }
 
 .content {
-  padding: 24px; /* p-6 */
+  padding: 24px; 
   flex-grow: 1;
 }
 
 .content h5 {
-  font-size: 1.5rem; /* text-2xl */
-  font-weight: 700; /* font-bold */
-  color: black; /* text-blue-700 */
-  margin-bottom: 8px; /* mb-2 */
+  font-size: 1.5rem; 
+  font-weight: 700; 
+  color: black; 
+  margin-bottom: 8px; 
 }
 
 .content p {
-  color: #4b5563; /* text-gray-600 */
-  margin-bottom: 16px; /* mb-4 */
+  color: #4b5563; 
+  margin-bottom: 16px;
 }
 
 .location {
-  font-size: 0.875rem; /* text-sm */
-  color: #374151; /* text-gray-700 */
-  font-weight: 500; /* font-medium */
+  font-size: 0.875rem; 
+  color: #374151; 
+  font-weight: 500; 
 }
 
 .footer {
-  padding: 24px; /* p-6 */
-  background-color: #f9fafb; /* bg-gray-50 */
+  padding: 24px; 
+  background-color: #f9fafb; 
 }
 
 .learnMoreButton {

@@ -1,4 +1,3 @@
-// /src/app/api/bookings/me/route.js
 import { NextResponse } from 'next/server';
 import jwt from 'jsonwebtoken';
 import { cookies } from 'next/headers';
@@ -8,7 +7,6 @@ const prisma = new PrismaClient();
 
 export async function GET(request) {
   try {
-    // 1. Get the logged-in user
     const cookieStore = await cookies();
     const token = cookieStore.get('token')?.value;
 
@@ -19,16 +17,15 @@ export async function GET(request) {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const userId = decoded.userId;
 
-    // 2. Find all bookings for that user
     const bookings = await prisma.booking.findMany({
       where: {
         userId: userId,
       },
       include: {
-        lodging: true, // Also include the lodging details for each booking
+        lodging: true, 
       },
       orderBy: {
-        checkIn: 'desc', // Show newest bookings first
+        checkIn: 'desc', 
       },
     });
 

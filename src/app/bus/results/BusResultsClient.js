@@ -1,4 +1,3 @@
-// /src/app/bus/results/page.js
 "use client";
 
 import { useSearchParams } from 'next/navigation';
@@ -6,7 +5,7 @@ import PageHeader from '../../../components/PageHeader';
 import BusResultCard from '../../../components/BusResultCard';
 import styles from './BusResults.module.css';
 
-// This is our DUMMY DATA. Later, your friend's API will provide this.
+// This is our DUMMY DATA.
 const dummyBuses = [
   { id: 1, name: 'Sajilo Yatra Express', type: 'A/C Deluxe', departureTime: '07:00 AM', arrivalTime: '02:00 PM', price: 1200 },
   { id: 2, name: 'Himalayan Tours & Travels', type: 'Sofa Bus (VIP)', departureTime: '08:30 AM', arrivalTime: '03:30 PM', price: 1800 },
@@ -23,7 +22,7 @@ export default function BusResultsPage() {
   return (
     <div>
       <PageHeader
-        imageUrl="/images/bus-hero.jpg" // We can reuse the same hero image
+        imageUrl="/images/bus-hero.jpg" 
         title="Available Buses"
         description={`Travel on ${date}`}
       />

@@ -1,4 +1,4 @@
-/* /src/components/SeatLayout.module.css */
+
 .container {
   background: #f4f4f4;
   padding: 20px;
@@ -15,7 +15,7 @@
 
 .seatGrid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr); /* 2 seats, aisle, 2 seats */
+  grid-template-columns: repeat(5, 1fr); 
   gap: 10px;
 }
 

@@ -1,4 +1,3 @@
-// /src/app/profile/page.js
 "use client";
 
 import { useState, useEffect } from 'react';
@@ -6,7 +5,7 @@ import { useAuth } from '../../context/AuthContext';
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from './ProfilePage.module.css';
-import PageHeader from '../../components/PageHeader'; // <-- We'll use our header
+import PageHeader from '../../components/PageHeader'; 
 import LocalGuideCard from '../../components/LocalGuideCard'; 
 
 export default function ProfilePage() {
@@ -65,7 +64,7 @@ export default function ProfilePage() {
     );
   }
 
-  // --- Helper components for each tab ---
+  //  Helper components for each tab 
   const BookingsContent = () => {
     if (isLoadingData) return <div className={styles.loading}>Loading bookings...</div>;
     if (bookings.length === 0) {
@@ -141,11 +140,11 @@ export default function ProfilePage() {
 
 
 
-  // --- Main Page Render ---
+  // Main Page Render 
   return (
     <>
       <PageHeader
-        imageUrl="/images/profile-hero.jpg" // You'll need a new hero image
+        imageUrl="/images/profile-hero.jpg" 
         title={`Welcome, ${user.name.split(' ')[0]}`}
         description={`Manage your bookings and host profile all in one place.`}
       />

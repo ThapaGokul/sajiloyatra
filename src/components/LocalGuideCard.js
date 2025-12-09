@@ -1,4 +1,3 @@
-// /src/components/LocalGuideCard.js
 import Image from 'next/image';
 import styles from './LocalGuideCard.module.css';
 

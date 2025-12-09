@@ -1,4 +1,3 @@
-// /src/app/api/lodging-details/route.js
 import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 
@@ -13,14 +12,14 @@ export async function GET(request) {
       return NextResponse.json({ error: 'Lodging ID is required' }, { status: 400 });
     }
 
-    // 1. Find the specific lodging
+    //Find the specific lodging
     const lodging = await prisma.lodging.findUnique({
       where: {
         id: parseInt(lodgingId),
       },
-      // 2. Also "include" all of its related "rooms"
+    
       include: {
-        rooms: true, // This is the magic part
+        rooms: true, 
       },
     });
 

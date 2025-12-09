@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import styles from './DestinationCard.module.css';
 
-// A simple function to check if the URL looks valid
+
 const isValidUrl = (url) => {
   if (!url) return false;
   return url.startsWith('http://') || url.startsWith('https://');
@@ -12,15 +12,15 @@ export default function DestinationCard({ dest, onLearnMore }) {
 
   let validImageUrl = null;
 
-  // 1. Check if the array exists and has an item
+  //  Check if the array exists and has an item
   if (imageUrls && imageUrls.length > 0) {
-    // 2. Check if that item is a *valid* URL string
+    // Check if that item is a *valid* URL string
     if (isValidUrl(imageUrls[0])) {
       validImageUrl = imageUrls[0];
     }
   }
 
-  // 3. If no valid URL was found, set the fallback
+  // If no valid URL was found, set the fallback
   const imageUrl = validImageUrl 
     ? validImageUrl
     : `https://placehold.co/600x400/EFEFEF/333?text=${encodeURIComponent(name)}`;
@@ -29,8 +29,6 @@ export default function DestinationCard({ dest, onLearnMore }) {
     <div className={styles.card}>
       <div className={styles.imageContainer} onClick={() => onLearnMore(dest)}>
         <Image
-          // Now, `imageUrl` is guaranteed to be either a
-          // valid URL or the placehold.co URL
           src={imageUrl} 
           alt={name}
           fill={true}

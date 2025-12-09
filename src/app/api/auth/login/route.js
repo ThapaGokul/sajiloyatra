@@ -1,10 +1,8 @@
-// /src/app/api/auth/login/route.js
 import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { cookies } from 'next/headers'; // Import cookies
-
+import { cookies } from 'next/headers';
 const prisma = new PrismaClient();
 
 export async function POST(request) {
@@ -42,14 +40,14 @@ export async function POST(request) {
         role: user.role
       },
       process.env.JWT_SECRET,
-      { expiresIn: '7d' } // Token lasts for 7 days
+      { expiresIn: '7d' } 
     );
     const cookieStore = await cookies();
 
     // 5. Set the token in a secure, HttpOnly cookie
     cookieStore.set('token', token, {
-      httpOnly: true, // Prevents client-side JS from accessing it
-      secure: process.env.NODE_ENV === 'production', // Only send over HTTPS in production
+      httpOnly: true, 
+      secure: process.env.NODE_ENV === 'production',
       maxAge: 60 * 60 * 24 * 7, // 7 days in seconds
       path: '/', // Cookie is valid for the entire site
     });

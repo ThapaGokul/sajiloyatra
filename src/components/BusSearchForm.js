@@ -1,4 +1,3 @@
-// /src/components/BusSearchForm.js
 "use client";
 
 import { useState } from 'react';
@@ -12,7 +11,7 @@ export default function BusSearchForm() {
   const [destination, setDestination] = useState("Pokhara");
   const [journeyDate, setJourneyDate] = useState(new Date());
   
-  const router = useRouter(); // To navigate to results page
+  const router = useRouter(); 
 
   const handleSearch = (e) => {
     e.preventDefault();

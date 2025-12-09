@@ -1,4 +1,3 @@
-// /src/components/TravelerStory.js
 "use client";
 
 import { useState } from 'react';

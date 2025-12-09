@@ -1,9 +1,7 @@
-// /src/app/bus/results/page.js
 import { Suspense } from 'react';
 import BusResultsClient from './BusResultsClient';
-import styles from './BusResults.module.css'; // We'll reuse this for the loader
+import styles from './BusResults.module.css';
 
-// A simple loading fallback
 function LoadingFallback() {
   return (
     <div className={styles.container}>

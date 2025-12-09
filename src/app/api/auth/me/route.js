@@ -1,4 +1,3 @@
-// /src/app/api/auth/me/route.js
 import { NextResponse } from 'next/server';
 import jwt from 'jsonwebtoken';
 import { cookies } from 'next/headers';
@@ -22,7 +21,7 @@ export async function GET(request) {
     // 3. Find the user in the database (to ensure they still exist)
     const user = await prisma.user.findUnique({
       where: { id: decoded.userId },
-      select: { id: true, email: true, name: true, role: true } // Return only safe data
+      select: { id: true, email: true, name: true, role: true } 
     });
 
     if (!user) {
@@ -33,7 +32,6 @@ export async function GET(request) {
     return NextResponse.json(user, { status: 200 });
 
   } catch (error) {
-    // This will catch expired or invalid tokens
     return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
   }
 }

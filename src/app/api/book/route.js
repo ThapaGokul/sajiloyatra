@@ -1,16 +1,15 @@
-// /src/app/api/book/route.js
 import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import { Resend } from 'resend';
-import jwt from 'jsonwebtoken';     // <-- 1. Import JWT
-import { cookies } from 'next/headers'; // <-- 2. Import Cookies
+import jwt from 'jsonwebtoken';    
+import { cookies } from 'next/headers'; 
 
 const prisma = new PrismaClient();
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request) {
   try {
-    // --- 3. GET THE LOGGED-IN USER ---
+    //GET THE LOGGED-IN USER ---
     const cookieStore = await cookies();
     const token = cookieStore.get('token')?.value;
 
@@ -25,9 +24,9 @@ export async function POST(request) {
       return NextResponse.json({ error: 'Invalid token.' }, { status: 401 });
     }
     
-    const userId = decodedToken.userId; // <-- We get the userId from the token
+    const userId = decodedToken.userId; // We get the userId from the token
 
-    // 4. Get the rest of the data from the form
+    // Get the rest of the data from the form
     const body = await request.json();
     const { lodgingId, roomTypeId, checkIn, checkOut, guestName, guestEmail, paymentId } = body;
 
@@ -47,7 +46,7 @@ export async function POST(request) {
       return NextResponse.json({ error: 'Lodging not found' }, { status: 404 });
     }
     
-    // --- 5. SAVE BOOKING WITH THE USER ID ---
+    // SAVE BOOKING WITH THE USER ID 
     const booking = await prisma.booking.create({
       data: {
         lodgingId: parseInt(lodgingId),
@@ -57,11 +56,11 @@ export async function POST(request) {
         guestName: guestName,
         guestEmail: guestEmail,
         paymentId: paymentId,
-        userId: userId, // <-- THIS IS THE FIX
+        userId: userId, 
       },
     });
 
-    // 6. Send confirmation email (unchanged)
+    //Send confirmation email
     try {
       await resend.emails.send({
         from: 'Sajilo Yatra <booking@sajiloyatra.me>',

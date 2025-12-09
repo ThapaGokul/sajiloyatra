@@ -1,4 +1,4 @@
-/* /src/app/bus/book/BusBook.module.css */
+
 .container {
   max-width: 1000px;
   margin: 40px auto;
@@ -8,12 +8,8 @@
   gap: 40px;
 }
 
-.details {
-  /* Left column */
-}
 
 .summary {
-  /* Right column */
   background: #f9f9f9;
   padding: 30px;
   border-radius: 12px;

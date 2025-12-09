@@ -1,4 +1,3 @@
-// /src/app/api/contact-host/route.js
 import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import { Resend } from 'resend';
@@ -15,17 +14,17 @@ export async function POST(request) {
       return NextResponse.json({ error: 'All fields are required' }, { status: 400 });
     }
 
-    // 1. Find the guide (and their User email)
+    // Find the guide (and their User email)
     const guide = await prisma.localGuide.findUnique({
       where: { id: parseInt(guideId) },
-      include: { user: true } // We need the user to get their email
+      include: { user: true } 
     });
 
     if (!guide) {
       return NextResponse.json({ error: 'Guide not found' }, { status: 404 });
     }
 
-    // 2. Save Message to Database (So it shows in their portal)
+    // Save Message to Database (So it shows in their portal)
     await prisma.message.create({
       data: {
         senderName,
@@ -35,11 +34,11 @@ export async function POST(request) {
       },
     });
 
-    // 3. Send Email Notification to the Host
+    // Send Email Notification to the Host
     try {
       await resend.emails.send({
         from: 'Sajilo Yatra <booking@sajiloyatra.me>',
-        to: guide.user.email, // Send to the Host's actual email
+        to: guide.user.email, 
         subject: `New Inquiry from ${senderName}`,
         html: `
           <h2>New Message Received</h2>

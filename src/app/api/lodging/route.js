@@ -1,4 +1,3 @@
-// [NODE.JS BACKEND LOGIC] /src/app/api/lodging/route.js
 import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 

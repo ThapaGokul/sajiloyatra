@@ -1,4 +1,3 @@
-// /src/app/bus/book/page.js
 "use client";
 
 import { useSearchParams } from 'next/navigation';
@@ -11,17 +10,16 @@ export default function BusBookPage() {
   const searchParams = useSearchParams();
   const [selectedSeats, setSelectedSeats] = useState([]);
 
-  // Get data from the URL
   const busId = searchParams.get('id');
-  const busPrice = searchParams.get('price') || 1000; // Default price
+  const busPrice = searchParams.get('price') || 1000; 
   const busName = searchParams.get('name') || 'Selected Bus';
 
   const handleSeatSelected = (seat) => {
     setSelectedSeats((prevSeats) => {
       if (prevSeats.includes(seat)) {
-        return prevSeats.filter((s) => s !== seat); // Deselect
+        return prevSeats.filter((s) => s !== seat); 
       } else {
-        return [...prevSeats, seat]; // Select
+        return [...prevSeats, seat]; 
       }
     });
   };
@@ -29,7 +27,6 @@ export default function BusBookPage() {
   const totalCost = selectedSeats.length * busPrice;
 
   const handleBooking = () => {
-    // This is where your friend's backend logic will go
     alert(`
       Booking Details (Frontend):
       Bus ID: ${busId}
@@ -40,14 +37,12 @@ export default function BusBookPage() {
 
   return (
     <div>
-      {/* 1. Add the PageHeader (as requested!) */}
+  
       <PageHeader
         imageUrl="/images/bus-hero.jpg"
         title="Select Your Seats"
         description={`You are booking for: ${decodeURIComponent(busName)}`}
       />
-
-      {/* 2. Page Content */}
       <div className={styles.container}>
         <div className={styles.details}>
           <SeatLayout 

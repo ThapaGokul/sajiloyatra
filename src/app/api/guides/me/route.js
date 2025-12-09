@@ -1,4 +1,3 @@
-// /src/app/api/guides/me/route.js
 import { NextResponse } from 'next/server';
 import jwt from 'jsonwebtoken';
 import { cookies } from 'next/headers';
@@ -8,7 +7,7 @@ const prisma = new PrismaClient();
 
 export async function GET(request) {
   try {
-    // 1. Get the logged-in user
+    // Get the logged-in user
     const cookieStore = await cookies();
     const token = cookieStore.get('token')?.value;
 
@@ -19,7 +18,7 @@ export async function GET(request) {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const userId = decoded.userId;
 
-    // 2. Find the one guide profile linked to this user
+    //Find the one guide profile linked to this user
     const guideProfile = await prisma.localGuide.findUnique({
       where: {
         userId: userId,
@@ -27,7 +26,6 @@ export async function GET(request) {
     });
 
     if (!guideProfile) {
-      // This is not an error, the user just isn't a host
       return NextResponse.json(null, { status: 200 });
     }
 

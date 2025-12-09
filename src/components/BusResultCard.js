@@ -1,6 +1,5 @@
-// /src/components/BusResultCard.js
 import styles from './BusResultCard.module.css';
-import Link from 'next/link'; // <-- 1. Import Link
+import Link from 'next/link'; 
 
 export default function BusResultCard({ bus }) {
   const { id, name, type, departureTime, arrivalTime, price } = bus;

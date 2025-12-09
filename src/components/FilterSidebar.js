@@ -1,4 +1,3 @@
-// /src/components/FilterSidebar.js
 import styles from './FilterSideBar.module.css';
 
 export default function FilterSidebar({ activeFilters, onFilterChange, availableAreas, onClose }) {

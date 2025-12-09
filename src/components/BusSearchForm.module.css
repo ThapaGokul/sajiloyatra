@@ -1,5 +1,3 @@
-/* /src/components/BusSearchForm.module.css */
-
 .searchBox {
   display: flex;
   align-items: center;
@@ -15,7 +13,7 @@
 .inputGroup {
   display: flex;
   flex-direction: column;
-  flex: 1; /* Make inputs share space */
+  flex: 1; 
 }
 
 .inputGroup label {
@@ -36,7 +34,7 @@
 }
 
 .searchButton {
-  align-self: flex-end; /* Align with bottom of inputs */
+  align-self: flex-end; 
   padding: 12px 25px;
   background-color: #8B0000;
   color: white;

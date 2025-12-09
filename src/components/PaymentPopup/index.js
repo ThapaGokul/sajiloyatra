@@ -1,4 +1,3 @@
-// /src/components/PaymentPopup/index.js
 import BookingWidget from '../BookingWidget';
 import styles from './PaymentPopup.module.css';
 

@@ -18,12 +18,12 @@ export async function GET(request) {
     }
     const data = await response.json();
     
-    // Simplify the data for our frontend
+
     const weatherData = {
       city: data.name,
       temp: Math.round(data.main.temp),
       condition: data.weather[0].main,
-      icon: data.weather[0].icon, // e.g., "10d"
+      icon: data.weather[0].icon, 
     };
 
     return NextResponse.json(weatherData);

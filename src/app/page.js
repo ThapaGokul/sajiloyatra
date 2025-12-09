@@ -1,4 +1,3 @@
-// [REACT COMPONENT] /src/app/page.js
 import Hero from '../components/Hero';
 import TripPlannerNav from '../components/TripPlannerNav';
 import PromoSection from '../components/PromoSection';

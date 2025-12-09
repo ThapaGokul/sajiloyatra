@@ -1,7 +1,6 @@
-// [REACT COMPONENT] /src/app/contact/page.js
 'use client';
 
-import styles from '../../app/page.module.css'; // We'll reuse our global and form styles
+import styles from '../../app/page.module.css'; 
 import { useState } from 'react';
 
 export default function ContactPage() {
@@ -10,7 +9,6 @@ export default function ContactPage() {
   const [message, setMessage] = useState('');
 
   return (
-    // We add some top padding to push the content below the fixed header
     <div className={styles.container} style={{ paddingTop: '120px' }}>
       <form className={styles.form}>
         <h2>Contact Us</h2>

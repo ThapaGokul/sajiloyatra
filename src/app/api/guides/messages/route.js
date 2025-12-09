@@ -1,4 +1,3 @@
-// /src/app/api/guides/messages/route.js
 import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import jwt from 'jsonwebtoken';
@@ -20,7 +19,7 @@ export async function GET(request) {
       where: { userId: decoded.userId },
       include: { 
         messages: {
-          orderBy: { createdAt: 'desc' } // Newest first
+          orderBy: { createdAt: 'desc' }
         }
       }
     });

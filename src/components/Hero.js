@@ -1,4 +1,3 @@
-// [REACT COMPONENT] /src/components/Hero.js
 import styles from './Hero.module.css';
 
 function Hero() {

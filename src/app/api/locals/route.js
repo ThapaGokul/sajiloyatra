@@ -1,14 +1,12 @@
-// /src/app/api/locals/route.js
 import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import { put } from '@vercel/blob';
 import { nanoid } from 'nanoid';
-import jwt from 'jsonwebtoken';     // <-- 1. Import JWT
-import { cookies } from 'next/headers'; // <-- 2. Import Cookies
+import jwt from 'jsonwebtoken';  
+import { cookies } from 'next/headers';
 
 const prisma = new PrismaClient();
 
-// Your GET function (unchanged)
 export async function GET(request) {
   try {
     const guides = await prisma.localGuide.findMany({
@@ -21,10 +19,8 @@ export async function GET(request) {
   }
 }
 
-// --- THIS IS THE UPDATED POST FUNCTION ---
 export async function POST(request) {
   try {
-    // 3. GET THE LOGGED-IN USER
     const cookieStore = await cookies();
     const token = cookieStore.get('token')?.value;
 
@@ -41,26 +37,25 @@ export async function POST(request) {
     
     const userId = decodedToken.userId;
 
-    // 4. GET THE FORM DATA
     const formData = await request.formData();
     const file = formData.get('imageUrl');
     const name = formData.get('name');
     const location = formData.get('location');
     const specialty = formData.get('specialty');
     const bio = formData.get('bio');
-    const type = formData.get('type'); // This will be "HOST"
+    const type = formData.get('type'); 
 
     if (!file || !name || !location || !bio || !type || !specialty) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
-    // 5. UPLOAD THE FILE (unchanged)
+    // UPLOAD THE FILE 
     const uniqueFilename = `${nanoid(8)}-${file.name}`;
     const blob = await put(uniqueFilename, file, {
       access: 'public',
     });
 
-    // 6. SAVE TO DATABASE (WITH USERID)
+    // SAVE TO DATABASE 
     const newGuide = await prisma.localGuide.create({
       data: {
         name,
@@ -69,7 +64,7 @@ export async function POST(request) {
         specialty,
         type,
         imageUrl: blob.url,
-        userId: userId, // <-- 7. THIS IS THE FIX
+        userId: userId, 
       },
     });
 
@@ -82,7 +77,6 @@ export async function POST(request) {
     return NextResponse.json({ error: 'You already have a host profile.' }, { status: 400 });
   }
 
-  // For all other errors, send a generic 500
   return NextResponse.json({ error: 'Failed to create new guide' }, { status: 500 });
 }
 }
