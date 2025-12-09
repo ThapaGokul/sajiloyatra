@@ -1,3 +1,4 @@
+//blank page for season
 import Image from 'next/image'; 
 import styles from './SeasonCard.module.css';
 
