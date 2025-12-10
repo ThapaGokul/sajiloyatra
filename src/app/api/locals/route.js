@@ -1,11 +1,10 @@
 import { NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
+import prisma from '@/lib/prisma';
 import { put } from '@vercel/blob';
 import { nanoid } from 'nanoid';
 import jwt from 'jsonwebtoken';  
 import { cookies } from 'next/headers';
 
-const prisma = new PrismaClient();
 
 export async function GET(request) {
   try {

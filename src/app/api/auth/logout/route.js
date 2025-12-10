@@ -1,19 +1,18 @@
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 
-export async function POST(request) {
-  try {
-    // 1. Clear the cookie by setting its maxAge to -1
-    cookies().set('token', '', {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      maxAge: -1, // Expire the cookie immediately
-      path: '/',
-    });
+export async function POST() {
 
-    return NextResponse.json({ message: 'Logout successful' }, { status: 200 });
-  } catch (error) {
-    console.error("Logout error:", error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
-  }
+  const cookieStore = await cookies();
+  
+  // Set the token to an empty string and expire it immediately
+  cookieStore.set('token', '', {
+    httpOnly: true,
+    expires: new Date(0), // Sets expiration to the past
+    path: '/',
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'strict',
+  });
+
+  return NextResponse.json({ message: 'Logged out successfully' });
 }
