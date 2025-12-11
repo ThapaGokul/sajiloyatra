@@ -28,7 +28,7 @@ export default function Header() {
     };
   }, []);
   const isHotelDetailPage = pathname.startsWith('/lodging/') && pathname !== '/lodging';
-  const isSolid = isScrolled || pathname === '/register' || pathname === '/login' || pathname === '/contact' || isHotelDetailPage;
+  const isSolid = isScrolled || pathname === '/register' || pathname === '/login' || pathname === '/contact' || pathname === '/profile' || isHotelDetailPage;
   const headerClassName = `${styles.header} ${isSolid ? styles.solid : ''}`;
   const navClassName = `${styles.nav} ${isMenuOpen ? styles.open : ''}`;
 

@@ -53,7 +53,7 @@ export default function GuidesPage() {
       <div className={styles.container}>
         <div className={styles.callToAction}>
           <p>Are you a certified guide? Find new clients here.</p>
-          <Link href="/guides/join" className={styles.joinButton} style={{backgroundColor: '#8B0000;'}}>
+          <Link href="/guides/join" className={styles.joinButton} style={{backgroundColor: '#8B0000'}}>
             Register as a Pro
           </Link>
         </div>

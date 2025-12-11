@@ -124,3 +124,8 @@
 .ctaButton:hover {
   background-color: #7e0101;
 }
+.profileHeader {
+  display: flex;
+  justify-content: center;
+  margin-top: 110px;
+}

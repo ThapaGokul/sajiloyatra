@@ -7,12 +7,14 @@ import Image from 'next/image';
 import styles from './ProfilePage.module.css';
 import PageHeader from '../../components/PageHeader'; 
 import LocalGuideCard from '../../components/LocalGuideCard'; 
+import DeleteProfileButton from '@/components/DeleteProfileButton';
+
 
 export default function ProfilePage() {
   const { user, isLoading: isAuthLoading } = useAuth();
   
   const [bookings, setBookings] = useState([]);
-  const [hostProfile, setHostProfile] = useState(null);
+  const [myProfile, setMyProfile] = useState(null);
   const [isLoadingData, setIsLoadingData] = useState(true);
   const [messages, setMessages] = useState([]);
   const [activeTab, setActiveTab] = useState('bookings'); 
@@ -22,13 +24,13 @@ export default function ProfilePage() {
       async function fetchData() {
         setIsLoadingData(true);
         try {
-          const [bookingsRes, hostProfileRes] = await Promise.all([
+          const [bookingsRes, ProfileRes] = await Promise.all([
             fetch('/api/bookings/me'),
             fetch('/api/guides/me')
           ]);
 
           if (bookingsRes.ok) setBookings(await bookingsRes.json());
-          if (hostProfileRes.ok) setHostProfile(await hostProfileRes.json());
+          if (ProfileRes.ok) setMyProfile(await ProfileRes.json());
           
         } catch (error) {
           console.error("Failed to fetch profile data:", error);
@@ -41,7 +43,7 @@ export default function ProfilePage() {
   }, [user]);
 
   useEffect(() => {
-    if (user && hostProfile) {
+    if (user && myProfile) {
       // Only fetch messages if user is a host
       fetch('/api/guides/messages')
         .then(res => res.json())
@@ -49,7 +51,12 @@ export default function ProfilePage() {
           if (Array.isArray(data)) setMessages(data);
         });
     }
-  }, [user, hostProfile]);
+  }, [user, myProfile]);
+
+  const handleProfileDeleted = () => {
+    setMyProfile(null);
+    setActiveTab('bookings');
+  };
 
 
   if (isAuthLoading) {
@@ -63,6 +70,12 @@ export default function ProfilePage() {
       </div>
     );
   }
+
+  const isGuide = myProfile?.type === 'PROFESSIONAL';
+  const profileLabel = isGuide ? "My Guide Profile" : "My Host Profile";
+  const deleteType = isGuide ? "guide" : "local";
+
+
 
   //  Helper components for each tab 
   const BookingsContent = () => {
@@ -93,22 +106,36 @@ export default function ProfilePage() {
     );
   };
 
-  const HostProfileContent = () => {
-    if (isLoadingData) return <div className={styles.loading}>Loading host profile...</div>;
-    if (hostProfile) {
+  const ProfileContent = () => {
+    if (isLoadingData) return <div className={styles.loading}>Loading profile...</div>;
+    if (myProfile) {
       return (
         <div>
           <p className={styles.profileIntro}>This is your public host profile. You can edit this in the future.</p>
-          <LocalGuideCard guide={hostProfile} onContactClick={() => {}} />
+          <LocalGuideCard guide={myProfile} onContactClick={() => {}} />
+
+            <div style={{ marginTop: '30px', padding: '20px', border: '1px solid #fee2e2', borderRadius: '8px', backgroundColor: '#fff5f5' }}>
+            <h3 style={{ fontSize: '1rem', color: '#dc2626', marginBottom: '8px', fontWeight: 'bold' }}>Warning</h3>
+            <p style={{ fontSize: '0.9rem', color: '#7f1d1d', marginBottom: '15px' }}>
+              No longer want to be listed as a host? This will permanently delete your public profile and messages.
+            </p>
+            <DeleteProfileButton type={deleteType} 
+            onDeleteSuccess={handleProfileDeleted}/>
+          </div>
         </div>
       );
     }
     return (
-      <div className={styles.emptyState}>
-        <p>You are not a local host yet.</p>
-        <Link href="/locals/join" className={styles.ctaButton}>
-          Become a Host
-        </Link>
+     <div className={styles.emptyState}>
+        <p>You do not have a public profile yet.</p>
+        <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', marginTop: '20px' }}>
+            <Link href="/locals/join" className={styles.ctaButton}>
+            Become a Host
+            </Link>
+            <Link href="/guides/join" className={styles.ctaButton} style={{backgroundColor: '#2563eb'}}>
+            Become a Guide
+            </Link>
+        </div>
       </div>
     );
   };
@@ -142,12 +169,12 @@ export default function ProfilePage() {
 
   // Main Page Render 
   return (
-    <>
-      <PageHeader
-        imageUrl="/images/profile-hero.jpg" 
-        title={`Welcome, ${user.name.split(' ')[0]}`}
-        description={`Manage your bookings and host profile all in one place.`}
-      />
+    <><section className={styles.profileHeader}>
+      <div className={styles.textContainer}>
+        <h1 className={styles.title}>{`Welcome, ${user.name.split(' ')[0]}`}</h1>
+        <p className={styles.description}>{`Manage your bookings and host profile all in one place.`}</p>
+      </div>
+      </section>
 
       <div className={styles.container}>
         {/* --- Tab Navigation --- */}
@@ -162,10 +189,10 @@ export default function ProfilePage() {
             className={`${styles.tabButton} ${activeTab === 'host' ? styles.tabActive : ''}`}
             onClick={() => setActiveTab('host')}
           >
-            My Host Profile
+            My Profile
           </button>
 
-          {hostProfile && (
+          {myProfile && (
             <button
               className={`${styles.tabButton} ${activeTab === 'inquiries' ? styles.tabActive : ''}`}
               onClick={() => setActiveTab('inquiries')}
@@ -179,7 +206,7 @@ export default function ProfilePage() {
         {/* --- Tab Content --- */}
         <div className={styles.tabContent}>
           {activeTab === 'bookings' && <BookingsContent />}
-          {activeTab === 'host' && <HostProfileContent />}
+          {activeTab === 'host' && <ProfileContent />}
           {activeTab === 'inquiries' && <InquiriesContent />}
         </div>
       </div>

@@ -1,4 +1,4 @@
-// /src/app/admin/page.js
+
 import styles from './AdminDashboard.module.css';
 
 export default function AdminDashboard() {

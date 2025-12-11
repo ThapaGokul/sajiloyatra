@@ -6,6 +6,7 @@ import jwt from 'jsonwebtoken';
 import { cookies } from 'next/headers';
 
 
+
 export async function GET(request) {
   try {
     const guides = await prisma.localGuide.findMany({
@@ -78,4 +79,52 @@ export async function POST(request) {
 
   return NextResponse.json({ error: 'Failed to create new guide' }, { status: 500 });
 }
+}
+
+export async function DELETE(request) {
+  try {
+    // 1. Get the Token
+    const cookieStore = await cookies();
+    const tokenCookie = cookieStore.get('token');
+    
+    if (!tokenCookie) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    // 2. Decode the Token
+    let decoded;
+    try {
+      decoded = jwt.verify(tokenCookie.value, process.env.JWT_SECRET);
+    } catch (err) {
+      return NextResponse.json({ error: "Invalid token" }, { status: 401 });
+    }
+
+    // 3. FIND THE USER (This was missing!)
+    const user = await prisma.user.findUnique({
+      where: { email: decoded.email },
+      select: { id: true }
+    });
+
+    if (!user) {
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
+    }
+
+    // 4. Delete the HOST Profile using user.id
+    const result = await prisma.localGuide.deleteMany({
+      where: {
+        userId: user.id,
+        type: "HOST"
+      }
+    });
+
+    if (result.count === 0) {
+      return NextResponse.json({ message: "No host profile found." }, { status: 404 });
+    }
+
+    return NextResponse.json({ message: "Host profile deleted successfully." });
+
+  } catch (error) {
+    console.error("Delete local error:", error);
+    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+  }
 }
