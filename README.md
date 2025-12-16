@@ -1,36 +1,119 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sajilo Yatra 🇳🇵
 
-## Getting Started
+> **Experience Nepal like a local.**
+> A digital platform connecting authentic local hosts with travelers seeking genuine cultural immersion.
 
-First, run the development server:
+
+##  About The Project
+
+**Sajilo Yatra** (meaning "Easy Journey" in Nepali) addresses the fragmentation in Nepal's tourism market. While generic booking platforms exist for hotels, travelers struggle to find verified local guides or authentic homestays.
+
+This platform bridges that gap by providing a trusted marketplace where:
+* **Travelers** can discover and book authentic local experiences securely.
+* **Locals** can create digital profiles to showcase their guiding services or homestays to a global audience.
+
+**Live Demo:** https://sajiloyatra.me
+
+##  Key Features
+
+* ** Secure Authentication:**
+    * Social Login via **Google OAuth**.
+    * Traditional Email/Password login with secure Bcrypt hashing.
+    * Session management via HttpOnly Cookies (JWT).
+
+* ** Find a Local:**
+    * Rich gallery view of verified Local Guides and Hosts.
+    * Filter by location (e.g., Pokhara, Kathmandu).
+    * Detailed profiles with bios, specialties, and photos.
+
+* ** Smart Booking System:**
+    * Interactive date-picker widget.
+    * Automatic cost calculation (Nightly Rate × Duration).
+    * User-friendly booking validation (preventing past dates).
+
+* ** Secure Payments:**
+    * Integrated **PayPal** Sandbox for secure, international transaction simulation.
+    * Instant booking confirmation upon payment success.
+
+* ** Profile Management:**
+    * Locals can register as hosts.
+    * Image upload functionality powered by **Vercel Blob** storage.
+
+## 🛠️ Tech Stack
+
+**Frontend & Backend (Full Stack):**
+* **Framework:** [Next.js 14](https://nextjs.org/) (App Router)
+* **Language:** JavaScript (ES6+)
+* **Styling:** CSS Modules (Responsive Design)
+
+**Database & Storage:**
+* **Database:** PostgreSQL (Hosted on Supabase/Neon)
+* **ORM:** Prisma
+* **File Storage:** Vercel Blob (for profile images)
+
+**Testing:**
+* **Unit Testing:** Jest
+* **Component Testing:** React Testing Library
+
+##  Getting Started
+
+Follow these instructions to set up the project locally.
+
+### Prerequisites
+* Node.js (v18 or higher)
+* npm (v9 or higher)
+* A PostgreSQL Database URL
+
+### Installation
+
+1.  **Clone the repo**
+    ```bash
+    git clone [https://github.com/your-username/sajilo-yatra.git](https://github.com/your-username/sajilo-yatra.git)
+    cd sajilo-yatra
+    ```
+
+2.  **Install dependencies**
+    ```bash
+    npm install
+    ```
+
+3.  **Environment Setup**
+    Create a `.env` file in the root directory. **DO NOT commit this file.**
+    ```env
+    # Database
+    DATABASE_URL="postgresql://user:password@host:port/db_name"
+
+    # Authentication
+    JWT_SECRET="your_super_secret_string"
+    GOOGLE_CLIENT_ID="your_google_client_id"
+    GOOGLE_CLIENT_SECRET="your_google_client_secret"
+    
+    # Payments (PayPal Sandbox)
+    NEXT_PUBLIC_PAYPAL_CLIENT_ID="your_paypal_client_id"
+
+    # Image Upload
+    BLOB_READ_WRITE_TOKEN="your_vercel_blob_token"
+    ```
+
+4.  **Database Migration**
+    Push the schema to your database.
+    ```bash
+    npx prisma db push
+    ```
+
+5.  **Run the App**
+    ```bash
+    npm run dev
+    ```
+    Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+##  Testing
+
+We adhere to a robust testing strategy covering critical financial and authentication flows.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+# Run all tests
+npm test
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# Run a specific test suite
+npm test src/test/BookingWidget.test.js
