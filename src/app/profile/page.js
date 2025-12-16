@@ -132,7 +132,7 @@ export default function ProfilePage() {
             <Link href="/locals/join" className={styles.ctaButton}>
             Become a Host
             </Link>
-            <Link href="/guides/join" className={styles.ctaButton} style={{backgroundColor: '#2563eb'}}>
+            <Link href="/guides/join" className={styles.ctaButton} style={{backgroundColor: '#8B0000'}}>
             Become a Guide
             </Link>
         </div>
@@ -150,7 +150,7 @@ export default function ProfilePage() {
     return (
       <div className={styles.bookingList}>
         {messages.map(msg => (
-          <div key={msg.id} className={styles.bookingCard} style={{borderLeft: '4px solid #007bff'}}>
+          <div key={msg.id} className={styles.bookingCard} style={{borderLeft: '4px solid #8B0000'}}>
             <h3>From: {msg.senderName}</h3>
             <p style={{fontSize: '0.9rem', color: '#888'}}>{new Date(msg.createdAt).toLocaleDateString()}</p>
             <p><strong>Email:</strong> {msg.senderEmail}</p>
